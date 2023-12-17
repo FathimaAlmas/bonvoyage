@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>About Us</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css\aboutus.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/about.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+             
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <main>
+      <section id="about-us">
+        <br /><br />
+        <h2>WHY US?</h2>
+        <br />
+        <p>
+          Welcome to BonVoyage! We are dedicated to provide unforgettable travel
+          experiences that create lifelong memories."Travel is the main thing
+          you purchase that makes you more extravagant”. We, at ‘BonVoyage’,
+          swear by this and put stock in satisfying travel dreams that make you
+          perpetually rich constantly. We have been moving excellent encounters
+          for a considerable length of time through our cutting-edge planned
+          occasion bundles and other fundamental travel administrations. We
+          rouse our clients to carry on with a rich life, brimming with
+          extraordinary travel encounters.
+        </p>
+        <br /><br />
+
+        <h2>Our History</h2>
+        <br />
+        <p>
+          Established in 2001, our company has been serving travelers with
+          passion and expertise for over 21 years. We have grown from a small
+          operation to a renowned travel agency, offering a wide range of
+          services and destinations.
+        </p>
+        <br /><br />
+
+        <h2>Our Mission</h2>
+        <br />
+        <p>
+          At our company, our mission is to inspire and enable people to explore
+          the world, connect with diverse cultures, and create meaningful
+          experiences. We strive to deliver exceptional customer service,
+          promote sustainable travel practices, and exceed our clients'
+          expectations.
+        </p>
+        <br /><br />
+
+        <h2>Our Team</h2>
+        <br />
+        <p>
+          We are proud to have a team of experienced professionals who are
+          passionate about travel. Our guides, planners, and support staff bring
+          a wealth of knowledge and expertise to ensure every journey with us is
+          remarkable.
+        </p>
+        <br /><br />
+
+        <h2>Services and Destinations</h2>
+        <br />
+        <p>
+          With our diverse range of services, we cater to all types of
+          travelers. From adventure tours to family vacations and luxury
+          getaways, we have something for everyone. Explore breathtaking
+          destinations around the world.
+        </p>
+        <br /><br />
+
+        <h2>Customer Testimonials</h2>
+        <blockquote>
+          <p>
+            "Our trip with BonVoyage was absolutely incredible. The attention to
+            detail and personalized service made it a journey of a lifetime!" -
+            Mohammed Ziyad
+          </p>
+          <br />
+          <p>
+            "I can't thank BonVoyage enough for the amazing experience. Their
+            knowledge and expertise truly enhanced our travel adventure." -
+            Aadil Rahiman
+          </p>
+          <br />
+        </blockquote>
+
+        <h2>Sustainability and Responsible Travel</h2>
+        <br />
+        <p>
+          As responsible travelers, we are committed to minimizing our
+          environmental impact and supporting local communities. We actively
+          engage in sustainable practices and contribute to initiatives that
+          promote the preservation of cultural heritage and natural resources.
+        </p>
+        <br /><br />
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            BonVoyage Travel Agency<br />
+            123 Main Street, Kochi,<br />
+            India<br />
+            Phone: +1 123-456-7890<br />
+            <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'hotel' %}">Hotels</a></li>
+            <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+            <li><a href="{% url 'packages' %}">Packages</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+              <li><a href="{% url 'booking' %}">Booking</a></li>
+              <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <ul class="social-media">
+            <li>
+              <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 BonVoyage. All rights reserved. |
+          <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

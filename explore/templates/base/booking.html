@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Booking Form</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Css\booking.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <style>
+      body {
+        margin: 0;
+
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/booking.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }  
+      footer{
+        bottom:-250%;
+      }
+      .login-container {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .login-message {
+        color: red; 
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align:center;
+      }
+      
+      .login-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff; 
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left:140px;
+      }
+      
+      .login-button:hover {
+        background-color: #0056b3; 
+      }
+    </style>
+  </head>
+  <body>
+      
+      {% block contents %}   
+        <h1>HOTEL BOOKING</h1>
+        <div class="container">
+          {% if user.is_authenticated %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+              
+                {{ form.firstname.label_tag }} {{ form.firstname }}
+                {{ form.lastname.label_tag }} {{ form.lastname }}
+                
+                
+                {{ form.phonenumber.label_tag }} {{ form.phonenumber }}
+                {{ form.email.label_tag }} {{ form.email }}
+                
+                
+                {{ form.checkin.label_tag }} {{ form.checkin }}
+                {{ form.checkout.label_tag }} {{ form.checkout }}
+                
+                
+                {{ form.guests.label_tag }} {{ form.guests }}
+                
+                
+                {{ form.room_type.label_tag }} {{ form.room_type }}
+                
+              
+                <label for="id_hotel">Select a Hotel:</label>
+                <select id="id_hotel" name="hotel">
+                    <option value="">-- Select a Hotel --</option>
+                    {% for hotel in hotels %}
+                        <option value="{{ hotel.id }}">{{ hotel.name }}</option>
+                    {% endfor %}
+                </select>
+                
+              
+                <label for="id_package">Select a Package:</label>
+                <select id="id_package" name="package">
+                    <option value="">-- Select a Package --</option>
+                    {% for package in packages %}
+                        <option value="{{ package.id }}">{{ package.name }}</option>
+                    {% endfor %}
+                </select>
+              
+                <button type="submit">MAKE PAYMENT</button>
+              
+            </form>
+          {% else %}
+            <div class="login-container">
+              <p class="login-message">Please log in to fill your booking.</p>
+              <a href="{% url 'user_login' %}" class="login-button">Log In</a>
+            </div>
+          {% endif %}
+       
+        </div>
+      
+      {% endblock %}
+
+      <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+            </p>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'destinations' %}">Destinations</a></li>
+              <li><a href="{% url 'hotel' %}">Hotels</a></li>
+              <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+              <li><a href="{% url 'packages' %}">Packages</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+              <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+      </footer>
+  </body>
+</html>
+
+
+
+
+            
+              

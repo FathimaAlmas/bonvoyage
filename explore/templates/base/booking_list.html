@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Details</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+         
+         body {
+            margin: 0;
+    
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.363),
+                rgba(5, 5, 5, 0.5)
+              ),
+              url(/staticfiles/images/booking.jpg);
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            }
+ 
+         .booking-detail-container {
+             width: 50%;
+             margin: 0 auto;
+             padding: 20px;
+             border: 1px solid #ccc;
+             background-color: #f9f9f9;
+             margin-top:30px;
+             
+         }
+         h1{
+            text-align:center;
+         }
+ 
+         /* Table styling */
+         table {
+             width: 100%;
+             border-collapse: collapse;
+             margin-top: 20px;
+         }
+ 
+         th, td {
+             padding: 12px;
+             border: 1px solid #ddd;
+         }
+ 
+         th {
+             background-color: #f2f2f2;
+         }
+ 
+         tr:nth-child(even) {
+             background-color: #f2f2f2;
+         }
+ 
+         /* Booking detail properties */
+         .property-label {
+             font-weight: bold;
+         }
+ 
+         /* Cancel button */
+         .cancel-button {
+             text-decoration: none;
+             background-color: #FF0000;
+             color: #fff;
+             padding: 5px 10px;
+             border-radius: 5px;
+             display: inline-block;
+         }
+ 
+         .cancel-button:hover {
+             background-color: #CC0000;
+         }
+         footer {
+            background-color: rgba(0, 0, 0, 0.918);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 90px;
+            width: 1250px;
+            height: auto;
+            margin-right: 500px;
+            position: absolute;
+            padding: 50px;
+            padding-top: 10px;
+            bottom: -90%;
+          }
+          
+          .footer-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-wrap: wrap;
+          }
+          
+          .footer-section {
+            flex-basis: 30%;
+            margin-left: -63px;
+
+          }
+          
+          .footer-section h3 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-family: cursive;
+            font-weight: lighter;
+          }
+          
+          .footer-section p {
+            color: yellow;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          
+          ul li {
+            margin-bottom: 10px;
+          }
+          
+          ul li a {
+            color: yellow;
+            text-decoration: none;
+          }
+          
+          ul.social-media li {
+            display: inline-block;
+            margin-right: 10px;
+          }
+          
+          ul.social-media li a {
+            color: yellow;
+            font-size: 20px;
+          }
+          
+          .footer-bottom p {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 16px;
+          }
+          
+          .footer-bottom a {
+            color: rgba(255, 255, 255, 0.63);
+            text-decoration: none;
+          }
+          
+          .footer-bottom a:hover {
+            text-decoration: underline;
+          }
+          .footer-section a{
+            color:yellow;
+            text-decoration:none;
+              }
+         footer{
+            bottom:-800%;
+            }
+            .login-message {
+              font-size: 18px;
+              color: red;
+              font-weight: bold;
+              margin-top: 20px;
+              text-align:center;
+          }
+          .login-button {
+            display: inline-block;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+           margin-left:290px;
+        }
+        .no-bookings-message {
+          color: #ff0000; /* Red color for emphasis */
+          font-size: 18px;
+          margin-bottom: 10px;
+          text-align:center;
+      }
+      
+      .back-button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #007bff; /* Blue color */
+          color: #fff; /* White text color */
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+          margin-left:290px;
+      }
+      
+      .back-button:hover {
+          background-color: #0056b3; /* Darker blue on hover */
+      }
+     
+    </style>
+</head>
+<body>
+    <div class="booking-detail-container">
+        <h1>Booking Details</h1>
+        {% if user.is_authenticated %}
+          {% if bookings %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td class="property-label">First Name</td>
+                            <td>{{ booking.firstname }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Last Name</td>
+                            <td>{{ booking.lastname }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Phone Number</td>
+                            <td>{{ booking.phonenumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Email</td>
+                            <td>{{ booking.email }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Check-In Date</td>
+                            <td>{{ booking.checkin }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Check-Out Date</td>
+                            <td>{{ booking.checkout }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Hotel</td>
+                            <td>{{ booking.hotel.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Package</td>
+                            <td>{{ booking.package.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Guests</td>
+                            <td>{{ booking.get_guests_display }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Room Type</td>
+                            <td>{{ booking.get_room_type_display }}</td>
+                        </tr>
+                        <tr>
+                            <td class="property-label">Total Cost</td>
+                            <td>{{ booking.total_cost }}Rs.40,199</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><a class="cancel-button" href="{% url 'cancel_book' booking.id %}">Cancel</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          {% else %}
+          <p class="no-bookings-message">No bookings available.</p>
+          <a href="{% url 'index' %}" class="back-button">Go Back</a>
+            {% comment %} <script>
+              alert("There are currently no bookings to display.");
+              window.location.href = "{% url 'index' %}"; 
+            </script>  {% endcomment %}
+          {% endif %}
+        {% else %}
+          <p class="login-message">Please log in to view your bookings.</p>
+          <a href="{% url 'user_login' %}" class="login-button">Log In</a>
+        {% endif %}
+    </div>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+            </p>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'destinations' %}">Destinations</a></li>
+              <li><a href="{% url 'hotel' %}">Hotels</a></li>
+              <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+              <li><a href="{% url 'packages' %}">Packages</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+              <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+    </footer>
+</body>
+</html>  

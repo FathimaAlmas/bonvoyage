@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Error</title>
+    <style>
+       
+        body {
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.363),
+                rgba(5, 5, 5, 0.5)
+              ),
+              url(/staticfiles/images/booking.jpg);
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 140px;
+          }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #ff0000;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .error {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #0077cc;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Error</h1>
+        <p>Sorry, there was an issue with your payment. Please try again.</p>
+        <p class="error">{{ error }}</p>
+        <p>Please try again or contact support.</p>
+        <div class="back-link">
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

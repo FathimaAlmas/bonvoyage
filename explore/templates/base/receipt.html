@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Css/invoice.css' %}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <title>Receipt</title>
+    <style>
+
+           
+            .header {
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+                margin-top: 10px;
+                color: #007BFF;
+            }
+            .bill-to, .invoice-info {
+               font-size: 13px;
+            
+            }
+            .booking-details{
+                font-size: 13px;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                
+            }
+
+            
+            table, th, td {
+                border: 1px solid black;
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px;
+                text-align: left;
+                font-size: 14px;
+            }
+            
+            tfoot{color:black;
+                font-size: 14px;
+            
+            }
+               
+            .notes {
+                margin-top: 30px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        
+    </style>
+
+</head>
+
+<body>
+<div class="invoice">
+    <div class="header">
+        <h1>TRAVEL INVOICE</h1>
+    </div>
+    <div class="details">
+        <div class="bill-to">
+            <h2>Bill To:</h2>
+            <p>{{ firstname }} {{ lastname }}</p>
+            <p><strong>Phone:</strong> {{ phonenumber }}</p>
+            <p><strong>Email: </strong>{{ email }}</p>
+        </div>
+        <div class="invoice-info">
+            <p><strong>Bill No. #:</strong> {{ id }}</p>
+            <p><strong>Check_in:</strong> {{ checkin }}</p>
+            <p><strong>Check_out:</strong> {{ checkout }}</p>
+            <p><strong>No.of Guests:</strong> {{ guests }}</p>
+            <p><strong>Room Type:</strong> {{ room_type}}</p>
+        </div>
+    </div>
+    <div class="booking-details">
+        <h2>Booking Details:</h2>
+        <p><strong>Package:</strong> {{ package.name }}
+        <p><strong>Hotel:</strong> {{ hotel.name }}
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Price(Rs.)</th>
+                <th>Total(Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Package Price</td>
+                <td>Rs.{{ package_price }}</td>
+                <td>Rs.{{ package_price }}</td>
+            </tr>
+            <tr>
+                <td>Hotel Accommodation</td>
+                <td>Rs.{{ hotel_price }}</td>
+                <td>Rs{{ hotel_price }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"><strong>Tax (7%)</strong></td>
+                <td><strong>Rs.{{ tax }}</strong></td>
+            </tr>
+            
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td><strong>Rs.{{ total_with_tax }}</strong></td>
+            </tr>
+
+        </tfoot>  
+    </table>
+    <div class="notes">
+        <p><i>Thank you for choosing our travel services.</i></p>
+    </div>
+</div>
+</body>
+</html>

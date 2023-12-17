@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking Confirmation</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Css/Charge.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Travel Booking Confirmation</h1>
+        <p>Thank you for booking your dream getaway with us!</p>
+        <div class="success-icon">&#10004;</div>
+        <p class="confirmation-message">Your booking has been successfully confirmed.</p>
+        
+        <div class="back-link">
+            <a href="/">Back to Home</a>
+        </div>
+
+        <div class="download-button">
+          <a href="{% url 'receipt'%}">
+            <button>Download Invoice</button>
+          </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+               
+            </p>
+          </div>
+    
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'destinations' %}">Destinations</a></li>
+              <li><a href="{% url 'hotel' %}">Hotels</a></li>
+              <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+              <li><a href="{% url 'packages' %}">Packages</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+              <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div>
+    
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+    </footer>  
+</body>
+</html>
+  
+  
+

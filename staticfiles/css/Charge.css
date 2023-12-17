@@ -1,0 +1,183 @@
+ body {
+    margin: 0;
+    
+    padding: 70px;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.363),
+        rgba(5, 5, 5, 0.5)
+      ),
+      url(/staticfiles/images/booking.jpg);
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  } 
+
+  .container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+  }
+
+  h1 {
+      color: #007acc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+  }
+
+  p {
+      color: #555;
+      font-family: Arial, sans-serif;
+      text-align: center;
+  }
+
+  .confirmation-message {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+  }
+
+  .success-icon {
+      color: #5cb85c;
+      font-size: 48px;
+      text-align: center;
+  }
+
+  .back-link {
+      text-align: center;
+  }
+
+  .back-link a {
+      text-decoration: none;
+      color: #007acc;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+  }
+
+  .back-link a:hover {
+      text-decoration: underline;
+  }
+  a {
+    text-decoration: none;
+  }
+  .footer-section a{
+    color:yellow;
+    text-decoration:none;
+  }
+ 
+.download-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.download-button a {
+    text-decoration: none;
+}
+
+.download-button button {
+    background-color: #0077cc;
+    color: #fff; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family:cursive ;
+}
+
+.download-button button:hover {
+    background-color: #005599; 
+}
+
+
+footer {
+    background-color: rgba(0, 0, 0, 0.918);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 90px;
+    width: 1260px;
+    height: auto;
+    
+    position: absolute;
+    right:1px;
+    padding: 50px;
+    padding-top: 10px;
+    bottom: -80%;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    flex-basis: 30%;
+    margin-left: -63px;
+
+  }
+  
+  .footer-section h3 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: cursive;
+    font-weight: lighter;
+  }
+  
+  .footer-section p {
+    color: yellow;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+  }
+  
+  ul li a {
+    color: yellow;
+    text-decoration: none;
+  }
+  
+  ul.social-media li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  ul.social-media li a {
+    color: yellow;
+    font-size: 20px;
+  }
+  
+  .footer-bottom p {
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+  }
+  
+  .footer-bottom a {
+    color: rgba(255, 255, 255, 0.63);
+    text-decoration: none;
+  }
+  
+  .footer-bottom a:hover {
+    text-decoration: underline;
+  }
+  .footer-section a{
+    color:yellow;
+    text-decoration:none;
+      }

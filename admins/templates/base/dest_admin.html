@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Destination Admin</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{%static 'css\destinations.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+
+        background: white;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/booking.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .list{
+        color: white;
+        background-color:rgb(17, 201, 17);
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 30px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-bottom: -10px;
+        margin-left: 1100px;
+        border-radius: 7px;
+       }
+       .list:hover {
+        background-color:rgb(51, 126, 51);
+       }
+       footer {
+        
+        bottom: -1000%;
+      }
+       
+        
+       .edit{
+        display: inline-block;
+        
+        
+      }
+       .delete{
+        margin-left:100px;
+       }
+       .box{
+        display:flex;
+        background-color:white;
+        padding: 10px 15px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        
+       }
+       .book-2 {
+        background: rgb(0, 102, 255);
+        font-size: 20px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        border:1px solid rgb(0, 102, 255);
+        border-radius:1px;
+        margin-left:20px;
+        padding: 10px 15px;
+        padding-top:10px;
+        cursor: pointer;
+      }
+      .book-2:hover{
+        background:rgba(16, 18, 168, 0.945);
+      }
+      
+      .book-3:hover {
+        background:rgb(196, 24, 24);
+      }
+  
+      .book-3 {
+        background: red;
+        font-size: 20px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-right:20px;
+        border:1px solid red;
+        padding: 10px 15px;
+        border-radius:1px;
+        padding:10px;
+        cursor: pointer;
+       
+      }
+      .footer-section a{
+        color:yellow;
+        text-decoration:none;
+          }
+      
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'adminhome' %}">Home</a></li>
+          <li><a href="{% url 'dest_admin' %}">Destinations</a></li>
+          <li><a href="{% url 'pack_admin' %}">Packages</a></li>
+        </ul>
+      </div>
+
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, Admin</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'admin_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+             
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+           
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+      
+    </div>
+    <a href="{% url 'admin_destination' %}" class="list">Add Destinations</a>
+    <div class="gallery">
+    {% for d in destinations %}
+      <div class="content">
+        {% if d.img %}
+          <img src="{{d.img.url}}" alt="" />
+        {% endif %}
+        
+        <h3>{{d.name}}</h3>
+        <br />
+        <p>{{d.desc}}</p>
+        <br />
+        <a href="{% url 'dynamic' d.id %}"> 
+          <button class="book-1">DETAILS</button>
+        </a>
+
+        <div class="box">
+          <div class="edit">
+          <a href="{% url 'update_dest' d.id %}">
+            <button class="book-2">Edit</button>
+          </a>
+          </div>
+
+          <div class="delete">
+          <form method="post" action="{% url 'delete_dest' d.id %}" >
+              {% csrf_token %}
+              <button type="submit" class="book-3">Delete</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            BonVoyage Travel Agency<br />
+            123 Main Street, Kochi,<br />
+            India<br />
+            Phone: +1 123-456-7890<br />
+            <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'adminhome' %}">Home</a></li>
+            <li><a href="{% url 'dest_admin' %}">Destinations</a></li>
+            <li><a href="{% url 'pack_admin' %}">Packages</a></li>
+          </ul>
+        </div>
+
+        {% comment %} <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+              <li><a href="{% url 'booking' %}">Booking</a></li>
+              <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+          </ul>
+        </div> {% endcomment %}
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <ul class="social-media">
+            <li>
+              <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 BonVoyage. All rights reserved. |
+          <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+    

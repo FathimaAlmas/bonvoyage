@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update Destinations</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Css/admindest.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/img2.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .comments {
+        background-color: #f5f5f5d7;
+        border: 1px solid yellow;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+        .user{
+           margin-bottom: 10px;
+           font-weight:bold;
+           font-size:15px;
+           font-family: cursive;
+        }
+    
+        .created {
+        margin-top:10px;
+        color: #746a6a;
+        font-size: 18px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'adminhome' %}">Home</a></li>
+          <li><a href="{% url 'dest_admin' %}">Destinations</a></li>
+          <li><a href="{% url 'pack_admin' %}">Packages</a></li>
+      
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, Admin</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'admin_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+              
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+  
+    <div class="container">
+      <h2 class="heading">Update Admin Destinations</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="dest_name">Name:</label>
+        <input type="text" name="dest_name" placeholder="" value="{{destinations.name}}" required/><br>
+        
+        <label for="dest_img">Image:</label>
+        <input type="file" name="dest_img" accept="image/*" required/><br>
+       
+        
+        <label for="dest_desc">Description:</label>
+        <input type="text" name="dest_desc" class="des" placeholder="" value="{{destinations.desc}}" required/><br>
+       
+        <button type="submit">Save</button>
+     
+      </form>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+            </p>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'adminhome' %}">Home</a></li>
+              <li><a href="{% url 'dest_admin' %}">Destinations</a></li>
+              <li><a href="{% url 'pack_admin' %}">Packages</a></li>
+              
+            </ul>
+          </div>
+{% comment %} 
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div> {% endcomment %}
+  
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+      </footer>
+    </body>
+  </html>
+  
+  

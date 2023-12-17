@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Booking</title>
+    <style>
+        body {
+            background-image: linear-gradient(
+                rgba(0, 0, 0, 0.363),
+                rgba(5, 5, 5, 0.5)
+              ),
+              url(/staticfiles/images/booking.jpg);
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .cancel-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+          
+            
+        }
+
+
+        .cancel-message {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .free-cancel-info {
+            color: #34d399;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .reason-dropdown {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .cancel-button,
+        .keep-button {
+            background-color: #e53e3e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cancel-button:hover,
+        .keep-button:hover {
+            background-color: #c53030;
+        }
+
+        .back-link {
+            color: #3490dc;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        button[type="submit"] {
+            background-color: red;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+       
+    </style>
+</head>
+
+<body>
+    <div class="cancel-container">
+
+        <h1 class="cancel-message">Cancel Your Booking</h1>
+        <p class="cancel-message">You have the option for free cancellation!</p>
+        <p class="free-cancel-info">Free Cancellation within 150 days</p>
+        <p class="free-cancel-info">Refund will be processed within 5 business days</p>
+        <label for="reason" class="cancel-message">Select Reason for Cancellation:</label>
+        <select id="reason" class="reason-dropdown" required>
+            <option value="" disabled selected>-- Select a reason --</option>
+            <option value="change_of_plans">Change of plans</option>
+            <option value="financial_issues">Financial issues</option>
+            <option value="personal_emergency">Personal emergency</option>
+            <option value="other">Other</option>
+        </select>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="action-buttons">
+                <button type="submit">Cancel Booking</button>
+               
+            </div> 
+        </form>
+        
+        <a href="{% url 'booking_list' %}" class="back-link">Go back to Booking Details</a>
+    </div>
+</body>
+
+</html>

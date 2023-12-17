@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blog.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+    <style>
+      body {
+        margin: 0;
+        
+        
+        background: white;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/booking.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+              
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+      
+    <div class="blog-heading">
+      <h2>BLOG<h2>
+    </div>
+    {% if user.is_authenticated %}
+      <a href="{% url 'add_blog' %}" class="list">Add Blog</a>
+    
+      <a href="{% url 'viewblog' %}" class="view">View Blog</a>
+    {% endif %}
+    <div  class="container">
+      {% for b in bloggs %}
+        <div class="card">
+          <div class="icon">
+            <img src="{{b.img.url}}" height=250 width=330>
+          </div>
+          <div class="content">
+            
+            <h4>{{b.name}}</h4>
+            <p class="date">{{b.date}}</p>
+            
+            <p class="desc">{{b.description}}</p>
+
+            <h5>{{b.head1}}</h5>
+            <p>{{b.para1}}</p>
+            
+            <h5>{{b.head3}}</h5>
+            <p>{{b.para3}}</p>
+            
+            <h5>Conclusion</h5>
+            <p>{{b.para4}}</p>
+           
+          </div>
+          <a class="more"></a>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <script>
+      let more = document.querySelectorAll('.more');
+      for (let i = 0; i<more.length; i++){
+        more[i].addEventListener('click',function(){
+          more[i].parentNode.classList.toggle('active')
+        })
+      }
+    </script>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            BonVoyage Travel Agency<br />
+            123 Main Street, Kochi,<br />
+            India<br />
+            Phone: +1 123-456-7890<br />
+            <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'hotel' %}">Hotels</a></li>
+            <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+            <li><a href="{% url 'packages' %}">Packages</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+              <li><a href="{% url 'booking' %}">Booking</a></li>
+              <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <ul class="social-media">
+            <li>
+              <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 BonVoyage. All rights reserved. |
+          <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+  
+
+
+
+
+
+
+
+
+
+

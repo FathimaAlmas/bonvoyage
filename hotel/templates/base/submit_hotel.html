@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Hotel Form</title>
+    <style>
+        body {
+          margin: 0;
+  
+          background-image: linear-gradient(
+              rgba(0, 0, 0, 0.363),
+              rgba(5, 5, 5, 0.5)
+            ),
+            url(/staticfiles/images/booking.jpg);
+          background-attachment: fixed;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          color: white;
+          
+        }  
+        h1 {
+            padding: 20px;
+            font-size: 25px;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+
+        form {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.822);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+           
+        }
+        {% comment %} label {
+            display: block;
+            margin-bottom: 8px;
+        } {% endcomment %}
+        .form-group {
+            display: flex;
+            flex-direction: column-reverse; /* Reverse the order of elements in a column */
+            margin-bottom: 8px;
+        }
+        input[type="checkbox"] {
+            position:absolute;
+            bottom:-178px;  
+            right:50px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+      
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 180px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        .login-container {
+            margin-top: 50px;
+            width:400px;
+            padding: 25px;
+            margin-left:450px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+          }
+          
+          .login-message {
+            color: red; 
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align:center;
+          }
+          
+          .login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left:160px;
+          }
+          
+          .login-button:hover {
+            background-color: #0056b3; 
+          }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Submit a Hotel</h1>
+    {% if user.is_authenticated %}
+        <form id="submitForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+            <div class="login-container">
+              <p class="login-message">Please log in to submit a hotel.</p>
+              <a href="{% url 'user_login' %}" class="login-button">Log In</a>
+            </div>
+    {% endif %}
+    
+    <script>
+        // Add this script to show a message after submitting the form
+        document.getElementById('submitForm').addEventListener('submit', function() {
+            alert('Hotel submitted successfully. Waiting for approval.');
+        });
+    </script>
+</body>
+</html>

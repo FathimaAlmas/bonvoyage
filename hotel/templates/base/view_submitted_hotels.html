@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Submitted Hotels</title>
+    
+    <style>
+      body {
+        margin: 0;
+
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/booking.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: black;
+        text-align: center;}
+
+        h1 {
+            color: black;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            width: 350px;
+            box-sizing: border-box;
+            text-align: left;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: 200px;
+            width:400px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        a.approve {
+            background-color: #4CAF50;
+        }
+
+        a.reject {
+            background-color: #f44336;
+        }
+        .back {
+          background-color: green;
+      }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .no-submissions {
+          width:20%;
+          text-align: center;
+         
+          background-color: white;
+          padding: 15px;
+          margin: auto; /* Center the div horizontally */
+          margin-top: 20px;
+          
+      }
+    </style>
+</head>
+<body>
+    
+    <h1>Submitted Hotels</h1>
+
+    {% if hotels %}
+        <ul>
+            {% for hotel in hotels %}
+                <li>
+                    <h2>{{ hotel.name }}</h2>
+                    <img src="{{ hotel.img.url }}" alt="{{ hotel.name }} Image">
+                    <p>{{ hotel.desc }}</p>
+                    <p>Price: {{ hotel.price }}Rs.</p>
+                    <p>Rating: {{ hotel.rating }}/5</p>
+                    <p>License Number: {{ hotel.license_number }}</p>
+                    <p>Submitted by: {{ hotel.owner }}</p>
+                    {% comment %} <a class="approve" href="{% url 'approve_hotel' pk=hotel.id %}">Approve</a>
+                    <a class="reject" href="{% url 'reject_hotel' pk=hotel.id %}">Reject</a> {% endcomment %}
+                    <a class="approve" href="{% url 'approve_hotel' pk=hotel.id %}" onclick="showMessage('Hotel approved successfully.')">Approve</a>
+                    <a class="reject" href="{% url 'reject_hotel' pk=hotel.id %}" onclick="showMessage('Hotel rejected successfully.')">Reject</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="no-submissions">
+          <p>No hotels submitted for approval.</p>
+          <a class="back" href="{% url 'hotelhome' %}">Back to Home</a>
+        </div>
+    {% endif %}
+    
+    <script>
+      function showMessage(message) {
+          alert(message);
+      }
+    </script>
+      
+</body>
+</html>

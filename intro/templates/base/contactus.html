@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact Us</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/contactus.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+ 
+    <style>
+      body {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/contact.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .footer-section a{
+        color:yellow;
+        text-decoration:none;
+          }
+      
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+             
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <section class="contact">
+      <div class="content">
+        <h2>Contact Us</h2>
+        <p>
+          For any inquiries or assistance, please don't hesitate to reach out to
+          us. You can use the contact details provided below or fill out the
+          contact form. Our team will be happy to help you.
+        </p>
+      </div>
+      <div class="container">
+        <div class="contactInfo">
+          <div class="box">
+            <div class="icon">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+              <h3>Address</h3>
+              <p>
+                BonVoyage Travel Agency 123 Main Street, Kochi,India<br />678622
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="icon">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+              <h3>Phone</h3>
+              <p>+1 123-456-7890</p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="icon">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+              <h3>Email</h3>
+              <a href="mailto:info@bonvoyage.com">
+                <p>info@bonvoyage.com</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="contactForm">
+          <form>
+            <h2>Send Message</h2>
+            <div class="inputBox">
+              <input type="text" name="fullname" required="required" />
+              <span>Full Name</span>
+            </div>
+            <div class="inputBox">
+              <input type="text" name="email" required="required" />
+              <span>Email</span>
+            </div>
+            <div class="inputBox">
+              <input type="text" name="number" required="required" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
+              <span>Phone Number</span>
+            </div>
+            <div class="inputBox">
+              <input type="text" name="location" required="required"/>
+              <span>Location</span>
+            </div>
+            <div class="inputBox">
+              <textarea name="message" required="required"></textarea>
+              <span>Type your Message...</span>
+            </div>
+
+            <div class="inputBox"> 
+              <input
+                type="submit"
+                name=""
+                value="Send"
+                onclick="showConfirmation(event)"
+              />
+            </div>
+
+            <div id="confirmationMessage"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+    {% comment %} <script>
+      function showConfirmation(event) {
+        event.preventDefault();
+  
+        const fullName = document.querySelector('input[name="fullname"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const message = document.querySelector('textarea[name="message"]').value;
+  
+        const number = document.querySelector('input[name="number"]').value;
+        const location = document.querySelector('input[name="location"]').value;
+  
+        if (fullName && email && message && number && location) {
+          const confirmationDiv = document.getElementById("confirmationMessage");
+          confirmationDiv.innerHTML =
+            "Thank you for your message! We will get back to you soon.";
+  
+          document.getElementById("contactForm").style.display = "none";
+        } else {
+          alert("Please fill out all the fields before submitting.");
+        }
+      }
+    </script> {% endcomment %}
+    <script>
+      function showConfirmation(event) {
+        event.preventDefault();
+    
+        const fullNameInput = document.querySelector('input[name="fullname"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        const messageInput = document.querySelector('textarea[name="message"]');
+        const numberInput = document.querySelector('input[name="number"]');
+        const locationInput = document.querySelector('input[name="location"]');
+        const confirmationDiv = document.getElementById("confirmationMessage");
+    
+        const fullName = fullNameInput.value;
+        const email = emailInput.value;
+        const message = messageInput.value;
+        const number = numberInput.value;
+        const location = locationInput.value;
+    
+        if (fullName && email && message && number && location) {
+          confirmationDiv.innerHTML = "Thank you for your message! We will get back to you soon.";
+    
+          // Reset form fields
+          fullNameInput.value = "";
+          emailInput.value = "";
+          messageInput.value = "";
+          numberInput.value = "";
+          locationInput.value = "";
+    
+          // Hide the confirmation message after a short delay
+          setTimeout(function () {
+            confirmationDiv.innerHTML = "";
+          }, 3000); // 3000 milliseconds (3 seconds) delay, adjust as needed
+        } else {
+          alert("Please fill out all the fields before submitting.");
+        }
+      }
+    </script>
+    
+    
+      
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            BonVoyage Travel Agency<br />
+            123 Main Street, Kochi,<br />
+            India<br />
+            Phone: +1 123-456-7890<br />
+            <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'hotel' %}">Hotels</a></li>
+            <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+            <li><a href="{% url 'packages' %}">Packages</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+              <li><a href="{% url 'booking' %}">Booking</a></li>
+              <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <ul class="social-media">
+            <li>
+              <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 BonVoyage. All rights reserved. |
+          <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

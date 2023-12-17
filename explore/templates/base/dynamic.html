@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DYNAMIC</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Css/dynamic.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+          <input type="submit" value="Signup" class="dropbtn">
+          <div class="dropdown-content">
+             
+             <a href="{% url 'user_register' %}">User Register</a>
+          </div>   
+        </div>
+          <div class="dropdown">
+            <input type="submit" value="Login" class="dropbtn">
+              <div class="dropdown-content">
+                  <a href="{% url 'admin_login' %}">Admin Login</a>
+                  <a href="{% url 'user_login' %}">User Login</a>
+                  <a href="{% url 'hotel_login' %}">Hotel Login</a>
+              </div>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+    
+    <div class ="container"/>
+      <img src="{{dynamics.img.url}}" alt=""/>
+      <img src="{{dynamics.img1.url}}" alt=""/>
+      <img src="{{dynamics.img2.url}}" alt=""/>
+      <img src="{{dynamics.img3.url}}" alt=""/>
+      <img src="{{dynamics.img4.url}}" alt=""/>
+      <img src="{{dynamics.img5.url}}" alt=""/>
+    </div>
+
+    <section id="details">
+      
+      <p>{{dynamics.desc1}}</p><br>
+      <p>{{dynamics.desc2}}</p><br>
+      
+      <a href="{% url 'packages' %}">
+        <button class="package-option">View Packages >>></button>
+      </a>
+      {% comment %} <div class="review">
+        <img src="{% static 'images/reviews.png' %}" alt="review">
+      </div> {% endcomment %}
+      
+    </section> 
+    
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            BonVoyage Travel Agency<br />
+            123 Main Street, Kochi,<br />
+            India<br />
+            Phone: +1 123-456-7890<br />
+            <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'hotel' %}">Hotels</a></li>
+            <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+            <li><a href="{% url 'packages' %}">Packages</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+              <li><a href="{% url 'booking' %}">Booking</a></li>
+              <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <ul class="social-media">
+            <li>
+              <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 BonVoyage. All rights reserved. |
+          <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Package2</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{%static 'css/pkg.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+
+        background: white;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.363),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/booking.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+      }
+      .content {
+        width: 30%;
+       
+        margin-left: 35px;
+      }
+      img {
+        width: 350px;
+        height: 320px;
+       
+      }
+      .transport-options {
+ 
+        margin-top: 30px;
+        position: absolute;
+        bottom: -640px;
+        right: 100px;
+        left: 780px;
+        padding-left: 20px;
+       
+      }
+      .box{
+        margin-right:930px;
+      }
+      .confirm{
+        margin-top:-10px;
+      }
+      .footer-section a{
+        color:yellow;
+        text-decoration:none;
+          }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+       
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+              
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+           
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+      
+    </div>
+    
+    <div class="gallery">
+       
+            <div class="content">
+                <img src="{{ package2.img.url }}" alt="Image ">
+                <h2>Day 1:Arrival in {{package2.name}}</h2>
+                <h4><i>Welcome to the picturesque! Your journey begins as you arrive at {{package2.name}}. We'll greet you with a warm welcome and transfer you to your comfortable accommodation in the heart of {{package2.name}}.</i></h4>
+                <br/>
+                <p>{{ package2.desc1 }}</p>
+                <br/>      
+            </div>
+    
+            <div class="content">
+                <img src="{{ package2.img1.url }}" alt="Image 1">
+                <h2>Day 2: Discovering Natural Wonders</h2>
+                <h4><i>Your second day in promises to be a day filled with awe-inspiring natural beauty and memorable adventures.</i></h4>
+                <br/>
+                <p>{{ package2.desc2 }}</p>
+                <br/>      
+            </div>
+
+            <div class="content">
+                <img src="{{ package2.img2.url }}" alt="Image 2">
+                <h2>Day 3: Farewell to {{package2.name}}</h2>
+                <h4><i>Your third day marks the end of your enchanting adventure. We hope you had a wonderful time exploring this captivating destination.</i></h4>
+                <br/>
+                <p>{{ package2.desc3 }}</p>
+                <br/>      
+            </div>
+
+            <div class="hotel-details">
+                <h3 class="box">Hotel Details</h3>
+                <div class="hotel-info">
+                    <img src="{{package2.hotelimg.url}}" alt="Hotel Image">
+                    <div class="hotel-description">
+                        <h3>{{package2.hotelname}}</h3>
+                        <p>{{package2.hoteldesc}}</p><br/>
+                        <p> <b>•Accommodation:</b> Choose from a variety of comfortable and spacious rooms, each with modern amenities and a private balcony. Wake up to the soothing sounds of nature and enjoy the fresh mountain air.</p><br/>
+                        <p><b> •Service:</b> Our dedicated staff is committed to providing exceptional service to ensure a comfortable and memorable stay for our guests.</p><br/>
+                        <p> <b>•Booking Information:</b> To book your stay at {{package2.hotelname}}, please visit or contact our reservations team at info@bonvoyage.com.</p><br/>
+                    </div>
+                </div>
+                <div class="hotel-amenities">
+                    <h3>Hotel Amenities</h3>
+                    <ul>
+                        <li>• Heated Swimming Pool</li>
+                        <li>• Spa and Wellness Center</li>
+                        <li>• Open-Air Restaurant</li>
+                        <li>• Free Wi-Fi</li>
+                        <li>• Fitness Center</li>
+                    </ul>
+                </div>
+                {% if user.is_authenticated %}
+                
+                  <button type="button" class="confirm" id="confirmButton" onclick="validateTransportSelection()">Confirm</button>
+                
+                {% else %}
+                <a href="{% url 'user_login' %}">
+                  <button class="confirm" id="confirmButton" onclick="validateTransportSelection()">Confirm</button>
+                </a>
+                {% endif %}
+                {% comment %} <button type="button" class="confirm" id="confirmButton" onclick="validateTransportSelection()">Confirm</button> {% endcomment %}
+            </div>
+           
+
+          <form action="{% url 'booking' %}?package={{ package2.name }}" method="POST">
+          {% csrf_token %}
+            <div class="transport-options">
+                  <h3>Transport Options:</h3>
+                  <label class="transport-option">
+                  <input type="radio" name="transport" value="By Bus" >By Bus
+                  </label>
+                  <label class="transport-option">
+                  <input type="radio" name="transport" value="5-seated" >5-seated
+                  </label>
+                  <label class="transport-option">
+                  <input type="radio" name="transport" value="By Bike" >By Bike
+                  </label>
+                  <label class="transport-option">
+                  <input type="radio" name="transport" value="7-seated" >7-seated
+                  </label>
+                  <p>
+                  We can also arrange transportation from your location to {{package2.name}} as part of our travel packages. For more details and customized transport options, please contact us at  +123-456-7890.
+                  </p> 
+            </div>
+          </form>
+ 
+    </div>
+    
+      <script>
+          function validateTransportSelection() {
+              var transportOptions = document.getElementsByName("transport");
+              var selectedOption = false;
+
+              for (var i = 0; i < transportOptions.length; i++) {
+                  if (transportOptions[i].checked) {
+                      selectedOption = true;
+                      break;
+                  }
+              }
+
+              if (!selectedOption) {
+                alert("Please select a transport option before confirming.");
+            } else {
+                
+                window.location.href = "{% url 'booking' %}";
+            }
+        }
+      </script>
+
+
+  
+      
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+            </p>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'destinations' %}">Destinations</a></li>
+              <li><a href="{% url 'hotel' %}">Hotels</a></li>
+              <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+              <li><a href="{% url 'packages' %}">Packages</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+              <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+    </footer>
+  </body>
+</html>
+  

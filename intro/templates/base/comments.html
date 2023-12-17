@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Comments</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{%static 'css/comments.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+
+    <style>
+      body {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(5, 5, 5, 0.5)
+          ),
+          url(/staticfiles/images/rev.jpg);
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .container {
+        background-color: #f9f9f95d;
+        padding: 20px;
+            
+        margin:auto;
+        max-width: 1000px;
+        margin-top:20px;
+      }
+      .title {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 25px;
+        padding-top: 20px;
+        color:black;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .comments {
+        background-color: #f5f5f5d7;
+        border: 1px solid yellow;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    .user{
+      margin-bottom: 10px;
+      font-weight:bold;
+      font-size:15px;
+      font-family: cursive;
+   }
+   .created {
+    margin-top:10px;
+    color: #777;
+    font-size: 15px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+    .text {
+        margin-top: 10px;
+        color: #777;
+        font-size: 18px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .edit {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top:10px;
+  }
+
+      .edit:hover {
+          background-color: #2980b9;
+      }
+      .delete-form {
+        display: inline-block;
+    }
+
+    .delete-button {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .delete-button:hover {
+        background-color: #c0392b;
+    } 
+    .action-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      background-color:rgb(0, 119, 255);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-left:850px;
+    }
+
+    .action-button:hover {
+      background-color:rgb(66, 144, 233) ;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+        <h1>Bon<span>Voyage</span></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'hotel' %}">Hotels</a></li>
+          <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+          <li><a href="{% url 'packages' %}">Packages</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="user-menu">
+        {% if user.is_authenticated %}
+        <div class="user-greeting">
+           <span>Hi, {{ user.username }}</span>
+        </div>
+        
+        <div class="logout">
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <div class="dropdown">
+           <input type="submit" value="Signup" class="dropbtn">
+           <div class="dropdown-content">
+              
+              <a href="{% url 'user_register' %}">User Register</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <input type="submit" value="Login" class="dropbtn">
+            <div class="dropdown-content">
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+                <a href="{% url 'user_login' %}">User Login</a>
+                <a href="{% url 'hotel_login' %}">Hotel Login</a>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+   
+    <div class="container">
+      <h1 class="title">Your Comments</h1>
+        <div class="comments-list">
+          
+          
+          {% for comment in user_comments %}
+          <div class="comments">
+            <div>
+              <h2 class="user">{{ comment.user.username }}</h2>
+            </div>
+            <div>
+              <p class="text">{{ comment.text }}</p>
+            </div>
+            <p class="created">Posted on {{ comment.created }}</p>
+            <a href="{% url 'update_comment' comment.id %}"><button class="edit">Edit</button></a>
+            <form method="post" action="{% url 'delete_comment' comment.id %}" class="delete-form">
+              {% csrf_token %}
+                <button type="submit" class="delete-button">Delete</button>
+               
+            </form>
+              
+          </div>
+          {% endfor %}
+          <a href="{% url 'create_comment' %}" class="action-button">Go Back</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>
+              BonVoyage Travel Agency<br />
+              123 Main Street, Kochi,<br />
+              India<br />
+              Phone: +1 123-456-7890<br />
+              <a href="mailto:info@bonvoyage.com">Email: info@bonvoyage.com</a>
+            </p>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'destinations' %}">Destinations</a></li>
+              <li><a href="{% url 'hotel' %}">Hotels</a></li>
+              <li><a href="{% url 'submit_hotel' %}">Add Hotel</a></li>
+              <li><a href="{% url 'packages' %}">Packages</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'create_comment' %}">Reviews</a></li>
+              <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'booking_list' %}">Booking Lists</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <ul class="social-media">
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?hl=en"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="https://in.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 BonVoyage. All rights reserved. |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+          </p>
+        </div>
+      </footer>
+    </body>
+  </html>
+  
